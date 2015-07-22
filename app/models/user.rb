@@ -5,9 +5,10 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :hotels
+  has_many :comments
 
   def name
   	(username) ? username : email
   end
-
+ 
 end

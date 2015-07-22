@@ -35,5 +35,35 @@
   <%= @hotel.user.name %>
 </p>
 
+<p>
+  <strong>Average comments rate:</strong>
+  <%= @hotel.average_rate %>
+</p>
+
+<h2>Add a comment:</h2>
+<%= simple_form_for([@hotel, @hotel.comments.build]) do |f| %>
+  <%= f.input :msg, label: "Comment" %>
+  <%= f.input :rate, collection: 1..5, as: :radio_buttons %><br/>
+  <%= f.button :submit %>
+<% end %>
+
+
+<h3>Comments</h3>
+<% @hotel.comments.each do |comment| %>
+  <% if comment.id != nil %>
+    <p>
+      <i><b>Hotel rate:</b></i><%= comment.rate %><br/>
+      <%= comment.msg %><br/>
+      <i><b><%= comment.user.name %></b></i>
+    </p>
+    <% if (current_user != nil) %>
+      <%= link_to 'Delete comment', [comment.hotel, comment],
+                   method:  :delete,
+                   data: { confirm: 'Are you sure?' } %>
+    <% end %>    
+  <% end %>
+<% end %>
+
+<br/>
 <%= link_to 'Edit', edit_hotel_path(@hotel) %> |
 <%= link_to 'Back', hotels_path %>
