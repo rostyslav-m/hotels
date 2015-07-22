@@ -30,5 +30,10 @@
   <%= @hotel.price %>
 </p>
 
+<p>
+  <strong>Autor:</strong>
+  <%= @hotel.user.name %>
+</p>
+
 <%= link_to 'Edit', edit_hotel_path(@hotel) %> |
 <%= link_to 'Back', hotels_path %>

@@ -29,6 +29,8 @@ class HotelsController < ApplicationController
   def create
     @hotel = Hotel.new(hotel_params)
 
+    @hotel.user = current_user
+
     respond_to do |format|
       if @hotel.save
         format.html { redirect_to @hotel, notice: 'Hotel was successfully created.' }
