@@ -27,10 +27,4 @@ class CommentsController < ApplicationController
       @hotel = Hotel.find(params[:hotel_id])
     end
 
-  private
-    def user_admin
-      redirect_to hotels_path if ((current_user == nil)||(current_user.is_admin == false))
-    end
-
-
 end

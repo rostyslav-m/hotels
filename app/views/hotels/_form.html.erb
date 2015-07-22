@@ -12,8 +12,19 @@
   <%= f.input :title, label: 'Hotel' %>
   <%= f.input :stars, collection: 1..5, as: :radio_buttons %>
   <%= f.input :breakfast, as: :boolean %>
-  <%= f.input :description %>
+  <%= f.input :description, rows: 3 %>
   <%= f.input :image_url %>
   <%= f.input :price, :hint => "prices should be in USD" %>
+
+  <%= f.simple_fields_for :address do |builder| %>
+    <%= builder.label :country %>
+    <%= builder.text_field :country %><br/>
+    <%= builder.input :state %>
+    <%= builder.input :city %>
+    <%= builder.input :street %>
+  <% end %>
+
+
+
   <%= f.button :submit %>
 <% end %>

@@ -18,10 +18,14 @@ class HotelsController < ApplicationController
   # GET /hotels/new
   def new
     @hotel = Hotel.new
+    @address = @hotel.build_address
   end
 
   # GET /hotels/1/edit
   def edit
+    if @hotel.address.nil?
+      @address = @hotel.build_address
+    end
   end
 
   # POST /hotels
@@ -74,6 +78,6 @@ class HotelsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def hotel_params
-      params.require(:hotel).permit(:title, :stars, :breakfast, :description, :image_url, :price)
+      params.require(:hotel).permit(:title, :stars, :breakfast, :description, :image_url, :price, address_attributes: [ :id, :hotel_id, :country, :state, :city, :street ])
     end
 end
