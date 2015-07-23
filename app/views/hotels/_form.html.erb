@@ -13,7 +13,7 @@
   <%= f.input :stars, collection: 1..5, as: :radio_buttons %>
   <%= f.input :breakfast, as: :boolean %>
   <%= f.input :description, rows: 3 %>
-  <%= f.input :image_url %>
+  <%= f.file_field :image_url %>
   <%= f.input :price, :hint => "prices should be in USD" %>
 
   <%= f.simple_fields_for :address do |builder| %>

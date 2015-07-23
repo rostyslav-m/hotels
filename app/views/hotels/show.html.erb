@@ -1,28 +1,33 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
+<h1>
   <%= @hotel.title %>
+</h1>
+
+<%= image_tag @hotel.image_url, :class => "style_image" %>
+
+<% @hotel.stars.times do %>
+  <%= image_tag "star.png" %>
+<% end %>
+
+<p>
+  <strong>Address:</strong>
+  <% if @hotel.address %>
+    <%= @hotel.address.country %>
+    <%= @hotel.address.state %>
+    <%= @hotel.address.city %>
+    <%= @hotel.address.street %>
+  <% end %>
 </p>
 
 <p>
-  <strong>Stars:</strong>
-  <%= @hotel.stars %>
-</p>
-
-<p>
-  <strong>Breakfast:</strong>
-  <%= @hotel.breakfast %>
-</p>
-
-<p>
-  <strong>Description:</strong>
   <%= @hotel.description %>
 </p>
 
 <p>
-  <strong>Image url:</strong>
-  <%= @hotel.image_url %>
+  <strong>Breakfast
+  <%= @hotel.breakfast ? "included" : "do not included" %>
+  </strong>
 </p>
 
 <p>
@@ -36,21 +41,10 @@
 </p>
 
 <p>
-  <strong>Average comments rate:</strong>
-  <%= @hotel.average_rate %>
+  <%= "Average comments rate: #{@hotel.average_rate}" if @hotel.average_rate %>
 </p>
 
-
-<p>
-  <strong>Address:</strong>
-  <% if @hotel.address %>
-    <%= @hotel.address.country %>,
-    <%= @hotel.address.state %>,
-    <%= @hotel.address.city %>,
-    <%= @hotel.address.street %>
-  <% end %>
-</p>
-
+<clear>
 
 <h2>Add a comment:</h2>
 <%= simple_form_for([@hotel, @hotel.comments.build]) do |f| %>
@@ -64,8 +58,8 @@
 <% @hotel.comments.each do |comment| %>
   <% if comment.id != nil %>
     <p>
-      <i><b>Hotel rate:</b></i><%= comment.rate %><br/>
       <%= comment.msg %><br/>
+      <i><b>Hotel rate by user:</b></i><%= comment.rate %><br/>
       <i><b><%= comment.user.name %></b></i>
     </p>
     <% if (current_user != nil) %>
