@@ -11,7 +11,7 @@ class Hotel < ActiveRecord::Base
   mount_uploader :image_url, ImageUploader
 
   def average_rate
-    comments.average(:rate).round(2) if comments.average(:rate)
+    comments.average(:rate) ? comments.average(:rate).round(2) : 0 
   end
   
 end

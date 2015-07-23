@@ -1,0 +1,20 @@
+<% if notice %>
+  <p><%= notice %></p>
+<% end %>
+
+<h1>The Best Hotels by users rate</h1>
+
+<% hotels = Hotel.all.sort_by{|hotel| hotel.average_rate }.reverse.last(5) %>
+  <% hotels.each do |hotel| %>
+    <%= link_to (hotel.image_url? ? (image_tag hotel.image_url, :class => "style_imagemini") : (image_tag "hotel.jpg", :class => "style_imagemini")), hotel_path(hotel) %>
+    <h3>
+      <%= link_to hotel.title,  hotel_path(hotel) %>
+      <% hotel.stars.times do %>
+        <%= image_tag "star-mini.png" %>
+      <% end %>
+    </h3>
+    <%= link_to truncate(hotel.description, length: 280), hotel_path(hotel) %><br/>
+    <%= number_to_currency(hotel.price) %><br/>
+    <%= "Average comments rate: #{hotel.average_rate}" if hotel.average_rate %>
+  <hr>
+<% end %>

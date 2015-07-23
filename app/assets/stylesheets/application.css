@@ -14,10 +14,22 @@
  *= require_self
  */
 
+  .contant {
+    padding: 0% 5% 0% 5%;
+
+  }
+
 .style_image {
-  width: 300px;
+  width: 200px;
   float: right;
+  margin: 5%;
 }
+
+.style_imagemini {
+  width: 100px; 
+  float: left;
+  margin-right: 2%;
+  }
  
 .simple_form label {
   float: left;
@@ -37,6 +49,8 @@
 .simple_form div.boolean label, .simple_form label.collection_radio {
   float: none;
   margin: 0;
+
+  width: 10px;
 }
 
 .simple_form label.collection_radio {

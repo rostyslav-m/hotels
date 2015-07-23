@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
   
+  get 'welcome/index'
+
+  get 'about', to: 'welcome#about'
+
   devise_for :users
   
-  root 'hotels#index'
+  root 'welcome#index'
 
   resources :hotels do
     resources :comments
