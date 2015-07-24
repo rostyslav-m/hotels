@@ -1,0 +1,75 @@
+<p id="notice"><%= notice %></p>
+
+<h1>
+  <%= @hotel.title %>
+  <% @hotel.stars.times do %>
+    <%= image_tag "star.png" %>
+  <% end %>
+</h1>
+
+<%= @hotel.image_url? ? (image_tag @hotel.image_url, :class => "style_image") : (image_tag "hotel.jpg", :class => "style_image") %>
+
+<p>
+  <strong>Address:</strong>
+  <% if @hotel.address %>
+    <%= @hotel.address.country %>, 
+    <%= @hotel.address.state %>, 
+    <%= @hotel.address.city %>, 
+    <%= @hotel.address.street %>
+  <% end %>
+</p>
+
+<p>
+  <%= @hotel.description %>
+</p>
+
+<p>
+  <strong>Breakfast
+  <%= @hotel.breakfast ? "included" : "do not included" %>
+  </strong>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @hotel.price %>
+</p>
+
+<p>
+  <strong>Autor:</strong>
+  <%= @hotel.user.name %>
+</p>
+
+<p>
+  <strong>Average comments rate:</strong>
+  <%= @hotel.average_rate %>
+</p>
+
+<clear>
+
+<h3>Add a comment:</h3>
+<%= simple_form_for([@hotel, @hotel.comments.build]) do |f| %>
+  <%= f.input :msg, label: "Comment" %>
+  <%= f.input :rate, collection: 1..5, as: :radio_buttons %><br/>
+  <%= f.button :submit %>
+<% end %>
+
+
+<h3>Comments:</h3>
+<% @hotel.comments.each do |comment| %>
+  <% if comment.id != nil %>
+    <p>
+      <%= comment.msg %><br/>
+      <i><b>Hotel rate by user:</b></i><%= comment.rate %><br/>
+      <i><b><%= comment.user.name %></b></i>
+    </p>
+    <% if (current_user != nil) %>
+      <%= link_to 'Delete comment', [comment.hotel, comment],
+                   method:  :delete,
+                   data: { confirm: 'Are you sure?' } %>
+    <% end %>    
+  <% end %>
+<% end %>
+
+<br/>
+<%= link_to 'Edit', edit_hotel_path(@hotel) %> |
+<%= link_to 'Back', hotels_path %>

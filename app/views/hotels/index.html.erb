@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+<%= link_to 'New Hotel', new_hotel_path %>
+
+<h1>Listing Hotels</h1>
+
+<% @hotels.each do |hotel| %>
+  <%= link_to (hotel.image_url? ? (image_tag hotel.image_url, :class => "style_imagemini") : (image_tag "hotel.jpg", :class => "style_imagemini")), hotel_path(hotel) %>
+    <h3><%= link_to hotel.title,  hotel_path(hotel) %>
+      <% hotel.stars.times do %>
+        <%= image_tag "star-mini.png" %>
+      <% end %>
+    </h3>
+    <%= link_to truncate(hotel.description, length: 280), hotel_path(hotel) %><br/>
+    <%= number_to_currency(hotel.price) %><br/>
+    <%= "Average comments rate: #{hotel.average_rate}" if hotel.average_rate %><br/>
+    <%= link_to 'Edit', edit_hotel_path(hotel) %>|
+    <%= link_to 'Destroy', hotel, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <hr>
+<% end %>
