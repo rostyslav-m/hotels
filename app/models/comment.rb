@@ -4,4 +4,7 @@ class Comment < ActiveRecord::Base
 
   validates  :msg, presence: true,
                    length: { minimum: 5 }
+
+  validates  :rate, presence: true
+
 end

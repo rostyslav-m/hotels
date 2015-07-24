@@ -17,10 +17,10 @@ ActiveRecord::Schema.define(version: 20150722200745) do
   enable_extension "plpgsql"
 
   create_table "addresses", force: :cascade do |t|
-    t.string   "country"
+    t.string   "country",    null: false
     t.string   "state"
-    t.string   "city"
-    t.string   "street"
+    t.string   "city",       null: false
+    t.string   "street",     null: false
     t.integer  "hotel_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -29,8 +29,8 @@ ActiveRecord::Schema.define(version: 20150722200745) do
   add_index "addresses", ["hotel_id"], name: "index_addresses_on_hotel_id", using: :btree
 
   create_table "comments", force: :cascade do |t|
-    t.text     "msg"
-    t.integer  "rate"
+    t.text     "msg",        null: false
+    t.integer  "rate",       null: false
     t.integer  "hotel_id"
     t.integer  "user_id"
     t.datetime "created_at", null: false

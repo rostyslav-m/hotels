@@ -8,6 +8,8 @@ class Hotel < ActiveRecord::Base
   validates  :title, presence: true,
                      length: { minimum: 3 }
 
+  validates  :stars, presence: true
+
   mount_uploader :image_url, ImageUploader
 
   def average_rate

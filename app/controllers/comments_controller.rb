@@ -8,8 +8,14 @@ class CommentsController < ApplicationController
     @comment = @hotel.comments.new(comment_params)
     @comment.user = current_user
     @comment.save
-    redirect_to hotel_path(@hotel)
+      if @comment.save
+        redirect_to @hotel, notice: 'Comment was successfully created.'
+      else
+        redirect_to @hotel, notice: 'Comment was not created. Please check required fields.'
+      end
   end
+
+
 
   def destroy
     @comment = @hotel.comments.find(params[:id])

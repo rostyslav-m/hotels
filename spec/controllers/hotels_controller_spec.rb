@@ -52,12 +52,12 @@ RSpec.describe HotelsController, type: :controller do
     end
   end
 
-  describe "GET #new" do
-    it "assigns a new hotel as @hotel" do
-      get :new, {}, valid_session
-      expect(assigns(:hotel)).to be_a_new(Hotel)
-    end
-  end
+#  describe "GET #new" do
+#    it "assigns a new hotel as @hotel" do
+#      get :new, {}, valid_session
+#      expect(assigns(:hotel)).to be_a_new(Hotel)
+#    end
+#  end
 
   describe "GET #edit" do
     it "assigns the requested hotel as @hotel" do
