@@ -4,7 +4,7 @@
 
 <h1>The Best Hotels by users rate</h1>
 
-<% hotels = Hotel.all.sort_by{|hotel| hotel.average_rate }.reverse.last(5) %>
+<% hotels = Hotel.all.sort {|a,b| a.average_rate <=> b.average_rate}.reverse.first(5) %>
   <% hotels.each do |hotel| %>
     <%= link_to (hotel.image_url? ? (image_tag hotel.image_url, :class => "style_imagemini") : (image_tag "hotel.jpg", :class => "style_imagemini")), hotel_path(hotel) %>
     <h3>
